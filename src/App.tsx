@@ -1,4 +1,4 @@
-import { auth, login } from "./firebase";
+import { auth, login, logout } from "./firebase";
 import { Button, Textarea, Flex, Container, CopyButton } from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
 import { useToken } from "./useToken";
@@ -20,7 +20,10 @@ function App() {
 				{token && (
 					<>
 						<Textarea value={token} autosize />
-						<Flex justify="flex-end">
+						<Flex justify="flex-end" gap={{ base: "sm" }}>
+							<Button onClick={logout} color="yellow">
+								Logout
+							</Button>
 							<CopyButton value={token}>
 								{({ copied, copy }) => (
 									<Button
