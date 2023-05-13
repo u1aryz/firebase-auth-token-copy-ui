@@ -1,10 +1,17 @@
 import { auth, login, logout } from "./firebase";
-import { Button, Textarea, Flex, Container, CopyButton } from "@mantine/core";
+import {
+	Button,
+	Textarea,
+	Flex,
+	Container,
+	CopyButton,
+	Text,
+} from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
-import { useToken } from "./useToken";
+import { useAuthState } from "./useAuthState.ts";
 
 function App() {
-	const [token, loading] = useToken(auth);
+	const [user, loading] = useAuthState(auth);
 
 	return (
 		<Container py={30} size="sm">
@@ -17,14 +24,15 @@ function App() {
 				>
 					Login by Google
 				</Button>
-				{token && (
+				{user && (
 					<>
-						<Textarea value={token} autosize />
+						<Textarea value={user.accessToken} autosize />
+						<Text align="end">
+							Expiration Time:{" "}
+							{new Date(user.stsTokenManager.expirationTime).toLocaleString()}
+						</Text>
 						<Flex justify="flex-end" gap={{ base: "sm" }}>
-							<Button onClick={logout} color="yellow">
-								Logout
-							</Button>
-							<CopyButton value={token}>
+							<CopyButton value={user.accessToken}>
 								{({ copied, copy }) => (
 									<Button
 										variant="light"
@@ -36,6 +44,9 @@ function App() {
 									</Button>
 								)}
 							</CopyButton>
+							<Button onClick={logout} color="yellow">
+								Logout
+							</Button>
 						</Flex>
 					</>
 				)}
