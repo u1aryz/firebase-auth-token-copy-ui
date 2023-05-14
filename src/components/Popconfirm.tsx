@@ -37,10 +37,16 @@ function Popconfirm({ children, title, onOk, onCancel }: Props) {
 				<Flex direction="column" gap="sm">
 					<Text size="sm">{title}</Text>
 					<Flex gap="xs" justify="end">
-						<Button miw={54} variant="outline" onClick={handleCancel} size="xs">
+						<Button
+							compact
+							miw={44}
+							variant="outline"
+							onClick={handleCancel}
+							size="sm"
+						>
 							No
 						</Button>
-						<Button miw={54} onClick={handleConfirm} size="xs">
+						<Button compact miw={44} onClick={handleConfirm} size="sm">
 							Yes
 						</Button>
 					</Flex>
