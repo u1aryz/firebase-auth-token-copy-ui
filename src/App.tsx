@@ -28,7 +28,7 @@ function App() {
 				{user && (
 					<>
 						<Textarea value={user.accessToken} readOnly={true} autosize />
-						<Text align="end">
+						<Text c="dimmed" align="end">
 							Expiration Time:{" "}
 							{new Date(user.stsTokenManager.expirationTime).toLocaleString()}
 						</Text>
