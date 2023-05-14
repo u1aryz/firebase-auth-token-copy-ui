@@ -10,6 +10,7 @@ import {
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
 import { useAuthState } from "@/useAuthState";
 import Popconfirm from "@/Popconfirm";
+import GitHubCorner from "@/GitHubCorner";
 
 function App() {
 	const [user, loading] = useAuthState(auth);
@@ -55,6 +56,7 @@ function App() {
 					</>
 				)}
 			</Flex>
+			<GitHubCorner />
 		</Container>
 	);
 }
