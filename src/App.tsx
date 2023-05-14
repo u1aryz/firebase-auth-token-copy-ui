@@ -8,7 +8,7 @@ import {
 	Text,
 } from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
-import { useAuthState } from "./useAuthState.ts";
+import { useAuthState } from "@/useAuthState";
 
 function App() {
 	const [user, loading] = useAuthState(auth);
