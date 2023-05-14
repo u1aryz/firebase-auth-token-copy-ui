@@ -1,5 +1,5 @@
 import { useIdToken } from "react-firebase-hooks/auth";
-import { Auth, User } from "firebase/auth";
+import { type Auth, type User } from "firebase/auth";
 import { useEffect } from "react";
 
 type AuthUser = User & {
