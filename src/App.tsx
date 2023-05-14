@@ -9,14 +9,14 @@ import {
 } from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
 import { useAuthState } from "@/useAuthState";
-import Popconfirm from "@/Popconfirm.tsx";
+import Popconfirm from "@/Popconfirm";
 
 function App() {
 	const [user, loading] = useAuthState(auth);
 
 	return (
 		<Container py={30} size="sm">
-			<Flex direction={{ base: "column" }} gap={{ base: "sm" }}>
+			<Flex direction="column" gap="sm">
 				<Button
 					loading={loading}
 					onClick={login}
@@ -32,7 +32,7 @@ function App() {
 							Expiration Time:{" "}
 							{new Date(user.stsTokenManager.expirationTime).toLocaleString()}
 						</Text>
-						<Flex justify="flex-end" gap={{ base: "sm" }}>
+						<Flex justify="flex-end" gap="sm">
 							<CopyButton value={user.accessToken}>
 								{({ copied, copy }) => (
 									<Button
