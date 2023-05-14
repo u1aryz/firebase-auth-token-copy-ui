@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
 import { useAuthState } from "@/useAuthState";
+import Popconfirm from "@/Popconfirm.tsx";
 
 function App() {
 	const [user, loading] = useAuthState(auth);
@@ -44,9 +45,12 @@ function App() {
 									</Button>
 								)}
 							</CopyButton>
-							<Button onClick={logout} color="yellow">
-								Logout
-							</Button>
+							<Popconfirm
+								title="Are you sure you want to log out?"
+								onOk={logout}
+							>
+								<Button color="yellow">Logout</Button>
+							</Popconfirm>
 						</Flex>
 					</>
 				)}
