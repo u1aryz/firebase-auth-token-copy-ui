@@ -1,4 +1,4 @@
-import { auth, login, logout } from "./firebase";
+import { auth, login, logout } from "@/firebase";
 import {
 	Button,
 	Textarea,
@@ -8,9 +8,9 @@ import {
 	Text,
 } from "@mantine/core";
 import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
-import { useAuthState } from "@/useAuthState";
-import Popconfirm from "@/Popconfirm";
-import GitHubCorner from "@/GitHubCorner";
+import { useAuthState } from "@/hooks/useAuthState";
+import Popconfirm from "@/components/Popconfirm";
+import GitHubCorner from "@/components/GitHubCorner";
 
 function App() {
 	const [user, loading] = useAuthState(auth);
