@@ -11,9 +11,9 @@ const useStyles = createStyles(() => ({
 	root: {
 		color: "white",
 		bottom: 0,
-		right: 0,
+		left: 0,
 		position: "absolute",
-		transform: "scale(1,-1)",
+		transform: "scale(-1,-1)",
 
 		[`&:hover .${getStylesRef("arm")}`]: {
 			animation: `${octocatWave} 560ms ease-in-out`,
