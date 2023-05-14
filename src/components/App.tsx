@@ -28,7 +28,12 @@ function App() {
 				</Button>
 				{user && (
 					<>
-						<Textarea value={user.accessToken} readOnly={true} autosize />
+						<Textarea
+							style={{ wordBreak: "break-all" }}
+							value={user.accessToken}
+							readOnly={true}
+							autosize
+						/>
 						<Text c="dimmed" align="end">
 							Expiration Time:{" "}
 							{new Date(user.stsTokenManager.expirationTime).toLocaleString()}
