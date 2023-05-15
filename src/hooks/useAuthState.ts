@@ -1,6 +1,6 @@
 import { useIdToken } from "react-firebase-hooks/auth";
 import { type Auth, type User } from "firebase/auth";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 type AuthUser = User & {
 	accessToken: string;
@@ -11,7 +11,7 @@ type AuthUser = User & {
 
 export const useAuthState = (
 	auth: Auth,
-): [AuthUser | undefined, boolean, Error | undefined] => {
+): [AuthUser | undefined, () => void, boolean, Error | undefined] => {
 	const [user, loading, error] = useIdToken(auth);
 
 	// https://github.com/CSFrequency/react-firebase-hooks/issues/299
@@ -30,5 +30,9 @@ export const useAuthState = (
 		}
 	}, [user]);
 
-	return [user as AuthUser, loading, error];
+	const refreshNow = useCallback(() => {
+		user?.getIdToken(true).catch(console.error);
+	}, [user]);
+
+	return [user as AuthUser, refreshNow, loading, error];
 };

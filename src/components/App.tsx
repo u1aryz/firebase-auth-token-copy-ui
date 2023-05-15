@@ -7,13 +7,13 @@ import {
 	CopyButton,
 	Text,
 } from "@mantine/core";
-import { FaCheck, FaCopy, FaGoogle } from "react-icons/fa";
+import { FaCheck, FaCopy, FaGoogle, FaRedo } from "react-icons/fa";
 import { useAuthState } from "@/hooks/useAuthState";
 import Popconfirm from "@/components/Popconfirm";
 import GitHubCorner from "@/components/GitHubCorner";
 
 function App() {
-	const [user, loading] = useAuthState(auth);
+	const [user, refresh, loading] = useAuthState(auth);
 
 	return (
 		<Container py={30} size="sm">
@@ -42,7 +42,7 @@ function App() {
 							<CopyButton value={user.accessToken}>
 								{({ copied, copy }) => (
 									<Button
-										variant="light"
+										variant="outline"
 										color={copied ? "teal" : "blue"}
 										onClick={copy}
 										leftIcon={copied ? <FaCheck /> : <FaCopy />}
@@ -51,11 +51,16 @@ function App() {
 									</Button>
 								)}
 							</CopyButton>
+							<Button variant="outline" onClick={refresh} leftIcon={<FaRedo />}>
+								Refresh Now
+							</Button>
 							<Popconfirm
 								title="Are you sure you want to log out?"
 								onOk={logout}
 							>
-								<Button color="yellow">Logout</Button>
+								<Button variant="outline" color="yellow">
+									Logout
+								</Button>
 							</Popconfirm>
 						</Flex>
 					</>
