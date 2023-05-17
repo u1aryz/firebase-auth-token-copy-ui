@@ -9,13 +9,19 @@ type AuthUser = User & {
 	};
 };
 
-export const useAuthState = (
-	auth: Auth,
-): [AuthUser | undefined, () => void, boolean, Error | undefined] => {
+type AuthStateHook = [
+	AuthUser | null | undefined,
+	() => void,
+	boolean,
+	Error | undefined,
+];
+
+export const useAuthState = (auth: Auth): AuthStateHook => {
 	const [user, loading, error] = useIdToken(auth);
+	const authUser = user as AuthUser | null;
 
 	// https://github.com/CSFrequency/react-firebase-hooks/issues/299
-	const refreshToken = (authUser: AuthUser) => {
+	const setupRefreshTimer = (authUser: AuthUser) => {
 		const tokenLife = authUser.stsTokenManager.expirationTime - Date.now();
 		const timer = setTimeout(() => {
 			authUser.getIdToken(true).catch(console.error);
@@ -24,15 +30,14 @@ export const useAuthState = (
 	};
 
 	useEffect(() => {
-		if (user) {
-			const authUser = user as AuthUser;
-			return refreshToken(authUser);
+		if (authUser) {
+			return setupRefreshTimer(authUser);
 		}
-	}, [user]);
+	}, [authUser?.accessToken]);
 
 	const refreshNow = useCallback(() => {
-		user?.getIdToken(true).catch(console.error);
-	}, [user]);
+		authUser?.getIdToken(true).catch(console.error);
+	}, [authUser]);
 
-	return [user as AuthUser, refreshNow, loading, error];
+	return [authUser, refreshNow, loading, error];
 };
