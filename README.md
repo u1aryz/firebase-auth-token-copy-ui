@@ -35,7 +35,7 @@ To start the application, run:
 pnpm run dev
 ```
 
-You can then access the web application at http://localhost:5173.
+You can then access the web application at http://localhost:5173 by default.
 
 To copy a Firebase Authentication ID Token, follow these steps:
 
